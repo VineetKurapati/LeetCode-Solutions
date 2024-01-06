@@ -1,11 +1,10 @@
 class Solution {
 public:
     vector<vector<int>> findMatrix(vector<int>& nums) {
-        int total = nums.size();
         int count = 0;
         int n = nums.size();
         vector<vector<int>>v;
-        while(count<total)
+        while(count<n)
         {
             set<int>st;
             for(int i = 0; i<n;i++)
