@@ -1,6 +1,6 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        result = []
+        result = [] 
         subset = []
         def backtrack(i):
             if i >= len(nums):
@@ -10,6 +10,5 @@ class Solution:
             backtrack(i+1)
             subset.pop()
             backtrack(i+1)
-
         backtrack(0)
         return result
