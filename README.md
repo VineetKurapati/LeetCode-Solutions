@@ -28,5 +28,4 @@ Describe the organization of your repository. For example:
 Provide instructions on how to clone and run the solutions locally. Include any dependencies or setup required. For example:
 
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/leetcode-solutions.git**
+   git clone https://github.com/your-username/leetcode-solutions.git
