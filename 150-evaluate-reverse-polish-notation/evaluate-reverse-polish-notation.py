@@ -1,23 +1,25 @@
 class Solution:
+    def eval(self, a, b, token):
+        if token == "+":
+            return a + b
+        elif token == "-":
+            return b - a
+        elif token == "/":
+            return int(b / a)
+        else:
+            return b * a
+
     def evalRPN(self, tokens: List[str]) -> int:
-        st = []
-        watch = ['+', '-', '*', '/']
-        def eval(num1, num2, operator):
-            if operator == '+':
-                return num1 + num2
-            elif operator == '-':
-                return num2 - num1
-            elif operator == '*':
-                return num1 * num2
-            else:
-                return num2 / num1
+        stack = []
+        operators = ["+", "-", "*", '/']
+
         for token in tokens:
-            if token not in watch:
-                st.append(token)
+            if token in operators:
+                a = stack.pop()
+                b = stack.pop()
+                val = self.eval(a, b, token)
+                stack.append(val)
             else:
-                num1 = int(st.pop())
-                num2 = int(st.pop())
-                res = eval(num1, num2, token)
-                st.append(res)
-        return int(st.pop())
-                
+                stack.append(int(token))
+
+        return int(stack.pop())
