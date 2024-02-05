@@ -10,8 +10,8 @@ class Solution:
         q = collections.deque()
         q.append(root)
         while q:
-            l = len(q)
             level = []
+            l = len(q)
             for i in range(l):
                 node = q.popleft()
                 if node:
