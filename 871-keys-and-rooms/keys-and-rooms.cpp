@@ -18,9 +18,9 @@ public:
                 }
             }
         }
-        for(int i = 0; i<n;i++)
+        for(auto vis : visited)
         {
-            if(visited[i] == false) return false;
+            if(!vis) return false;
         }
         return true;
     }
