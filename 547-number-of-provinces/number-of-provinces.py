@@ -1,20 +1,34 @@
+from collections import defaultdict
+
 class Solution:
     def findCircleNum(self, isConnected: List[List[int]]) -> int:
         n = len(isConnected)
-        l1 = [0] * n
-        for i in range(n):
-            l1[i] = i
-        def get(x):
-            return l1[x]
+        parent = [i for i in range(n)]
+        rank = [0] * n
+        res = n
+        
+        def find(x):
+            if parent[x] != x:
+                parent[x] = find(parent[x])
+            return parent[x]
+        
         def union(x, y):
-            rx = get(x)
-            ry = get(y)
-            if(rx != ry):
-               for i in range(0, len(l1)):
-                   if l1[i] == ry:
-                       l1[i] = rx
-        for i in range(0, n):
-            for j in range(i+1, n):
+            nonlocal res
+            root_x = find(x)
+            root_y = find(y)
+            if root_x != root_y:
+                if rank[root_x] > rank[root_y]:
+                    parent[root_y] = root_x
+                elif rank[root_x] < rank[root_y]:
+                    parent[root_x] = root_y
+                else:
+                    parent[root_y] = root_x
+                    rank[root_x] += 1
+                res -= 1
+        
+        for i in range(n):
+            for j in range(i+1, n):  # Optimization: Only iterate over the upper triangular part since the matrix is symmetric
                 if isConnected[i][j] == 1:
                     union(i, j)
-        return len(set(l1))
+        
+        return res
