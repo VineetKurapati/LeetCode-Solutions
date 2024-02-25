@@ -4,7 +4,6 @@ class Solution:
     def findCircleNum(self, isConnected: List[List[int]]) -> int:
         n = len(isConnected)
         parent = [i for i in range(n)]
-        rank = [0] * n
         res = n
         
         def find(x):
@@ -17,13 +16,7 @@ class Solution:
             root_x = find(x)
             root_y = find(y)
             if root_x != root_y:
-                if rank[root_x] > rank[root_y]:
-                    parent[root_y] = root_x
-                elif rank[root_x] < rank[root_y]:
-                    parent[root_x] = root_y
-                else:
-                    parent[root_y] = root_x
-                    rank[root_x] += 1
+                parent[root_y] = root_x
                 res -= 1
         
         for i in range(n):
