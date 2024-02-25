@@ -8,12 +8,12 @@ class Node:
 from typing import Optional
 class Solution:
     def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
-        oldtoNew = {}
+        graph = defaultdict(list)
         def dfs(node):
-            if node in oldtoNew:
-                return oldtoNew[node]
+            if node in graph:
+                return graph[node]
             copy = Node(node.val)
-            oldtoNew[node] = copy
+            graph[node] = copy
             for nei in node.neighbors:
                 copy.neighbors.append(dfs(nei))
             return copy
