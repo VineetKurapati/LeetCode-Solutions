@@ -15,5 +15,6 @@ class Solution:
                 q.append(curr.right)
             if curr.left:
                 q.append(curr.left)
+            
         return res
             
