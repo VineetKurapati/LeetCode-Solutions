@@ -1,9 +1,9 @@
 class Solution:
     def getCommon(self, nums1: List[int], nums2: List[int]) -> int:
-        num2 = set(nums2)
+        nums2 = set(nums2)
         res = float("inf")
         for num in nums1:
-            if num in num2:
+            if num in nums2:
                 if num >= res:
                     break
                 res = min(num, res)
