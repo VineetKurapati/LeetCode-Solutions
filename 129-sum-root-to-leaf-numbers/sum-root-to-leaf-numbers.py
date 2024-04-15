@@ -7,17 +7,16 @@
 class Solution:
     def sumNumbers(self, root: Optional[TreeNode]) -> int:
         res = 0
-        if not root:
-            return res
-        def dfs(root, temp):
+        def get(root, temp):
             nonlocal res
             if root is None:
                 return
-            temp = temp * 10 + root.val
+            char = str(root.val)
+            temp += char
             if root.left is None and root.right is None:
-                res += temp
+                res += int(temp)
                 return
-            dfs(root.left, temp)
-            dfs(root.right, temp)
-        dfs(root, 0)
+            get(root.left, temp )
+            get(root.right, temp)
+        get(root, "")
         return res
