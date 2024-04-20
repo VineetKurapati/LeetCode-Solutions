@@ -1,33 +1,33 @@
-from typing import List
-
 class Solution:
     def findFarmland(self, land: List[List[int]]) -> List[List[int]]:
-        def dfs(x, y, min_row, min_col, max_row, max_col):
-            if x < 0 or y < 0 or x >= rows or y >= cols or land[x][y] != 1 or (x, y) in visited:
-                return min_row, min_col, max_row, max_col
-            
-            visited.add((x, y))
-            
-            min_row = min(min_row, x)
-            min_col = min(min_col, y)
-            max_row = max(max_row, x)
-            max_col = max(max_col, y)
-            
-            min_row, min_col, max_row, max_col = dfs(x + 1, y, min_row, min_col, max_row, max_col)
-            min_row, min_col, max_row, max_col = dfs(x - 1, y, min_row, min_col, max_row, max_col)
-            min_row, min_col, max_row, max_col = dfs(x, y + 1, min_row, min_col, max_row, max_col)
-            min_row, min_col, max_row, max_col = dfs(x, y - 1, min_row, min_col, max_row, max_col)
-            
-            return min_row, min_col, max_row, max_col
+        n = len(land)
+        m = len(land[0])
         
-        rows, cols = len(land), len(land[0])
-        visited = set()
-        result = []
+        def dfs(i, j, start_row, start_col, end_row, end_col):
+            if i < 0 or j < 0 or i >= n or j >= m or land[i][j] != 1:
+                return start_row, start_col, end_row, end_col
+            
+            # Mark the cell as visited
+            land[i][j] = 2
+            
+            
+            start_row = min(start_row, i)
+            start_col = min(start_col, j)
+            end_row = max(end_row, i)
+            end_col = max(end_col, j)
+            
+            # Explore adjacent cells
+            start_row, start_col, end_row, end_col = dfs(i + 1, j, start_row, start_col, end_row, end_col)
+            start_row, start_col, end_row, end_col = dfs(i - 1, j, start_row, start_col, end_row, end_col)
+            start_row, start_col, end_row, end_col = dfs(i, j + 1, start_row, start_col, end_row, end_col)
+            start_row, start_col, end_row, end_col = dfs(i, j - 1, start_row, start_col, end_row, end_col)
+            
+            return start_row, start_col, end_row, end_col
         
-        for i in range(rows):
-            for j in range(cols):
-                if land[i][j] == 1 and (i, j) not in visited:
-                    min_row, min_col, max_row, max_col = dfs(i, j, i, j, i, j)
-                    result.append([min_row, min_col, max_row, max_col])
-        
-        return result
+        res = []
+        for i in range(n):
+            for j in range(m):
+                if land[i][j] == 1:
+                    start_row, start_col, end_row, end_col = dfs(i, j, i, j, i, j)
+                    res.append([start_row, start_col, end_row, end_col])
+        return res
