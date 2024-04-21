@@ -1,21 +1,21 @@
 class Solution:
     def validPath(self, n: int, edges: List[List[int]], source: int, destination: int) -> bool:
+        graph = defaultdict(list)
+        for e in edges:
+            u = e[0]
+            v = e[1]
+            graph[u].append(v)
+            graph[v].append(u)
+        q = []
+        q.append(source)
         vis = set()
-        queue = []
-        queue.append(source)
-        adj_list = defaultdict(list)
-        for edge in edges:
-            u, v = edge
-            adj_list[u].append(v)
-            adj_list[v].append(u)  
-        while queue:
-            curr = queue.pop()
-            print(curr)
+        while q:
+            curr = q.pop()
             if curr == destination:
                 return True
             if curr in vis:
                 continue
             vis.add(curr)
-            for neigh in adj_list[curr]:
-                queue.append(neigh)
+            for neigh in graph[curr]:
+                q.append(neigh)
         return False
