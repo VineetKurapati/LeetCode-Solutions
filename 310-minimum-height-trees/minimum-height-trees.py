@@ -15,7 +15,6 @@ class Solution:
         while leaves:
             if n<=2:
                 return list(leaves)
-            length = len(leaves)
             for i in range(len(leaves)):
                 node = leaves.popleft()
                 n-=1
