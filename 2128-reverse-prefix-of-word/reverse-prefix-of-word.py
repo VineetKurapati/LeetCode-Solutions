@@ -1,25 +1,13 @@
 class Solution:
     def reversePrefix(self, word: str, ch: str) -> str:
-        temp = ""
-        i = 0
-        if ch not in word:
-            return word
+        min_idx = float("inf")
         n = len(word)
-        while i < n:
-            w = word[i]
-            if w == ch:
-                temp += w
-                i+=1
-                break
-            else:
-                temp+=w
-            i+=1
-        temp = reversed(temp)
-        res = ""
-        for w in temp:
-            res+=w
-        while i < n:
-            res += word[i]
-            i+=1
+        for i in range(n-1, -1, -1):
+            if word[i] == ch:
+                min_idx = min(min_idx, i)
+        if min_idx == float("inf"):
+            return word
+        res = word[:min_idx+1]
+        res = res[::-1]
+        res += word[min_idx+1:]
         return res
-        
