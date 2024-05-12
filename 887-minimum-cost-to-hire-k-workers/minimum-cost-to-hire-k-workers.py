@@ -13,9 +13,9 @@ class Solution:
         for ratio, q in workers:
             quality_sum += q
             heapq.heappush(pq, -q)
-            if len(pq) > k:  # if more than k workers, remove the one with maximum quality
+            if len(pq) > k: 
                 quality_sum += heapq.heappop(pq)
-            if len(pq) == k:  # if exactly k workers, calculate cost
+            if len(pq) == k: 
                 min_cost = min(min_cost, ratio * quality_sum)
         
         return min_cost
