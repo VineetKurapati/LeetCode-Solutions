@@ -25,8 +25,10 @@ class Solution:
             while i < n:
                 if grid[i][j] == 1:
                     num_ones += 1
+                else:
+                    num_zeros
                 i+=1
-            if num_ones < n / 2:
+            if num_ones < n/2:
                 # Flipping the col
                 i = 0
                 while i < n:
