@@ -5,24 +5,25 @@
 #         self.next = next
 class Solution:
     def swapNodes(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
-        dummy1 = ListNode(0)
-        dummy1.next = head
-        def getlen(head):
-            count = 0
-            while head:
-                head = head.next 
-                count += 1
-            return count 
-        n = getlen(head)
-        n -= k
-        dummy2 = head
-        while k:
-            dummy1 = dummy1.next 
+        dummy = head 
+        temp_k = k
+        while k > 1:
+            dummy = dummy.next 
             k-=1
-        while n:
-            dummy2 = dummy2.next
+        def lengthlist(root):
+            count = 0 
+            while root:
+                root = root.next 
+                count +=1 
+            return count 
+        n = lengthlist(head)
+        n-= temp_k
+        dummy1 = head
+        while n >= 1 and dummy1:  
+            dummy1 = dummy1.next 
             n-=1
-        temp = dummy1.val
-        dummy1.val = dummy2.val
-        dummy2.val = temp
+        print(dummy1.val)
+        temp = dummy.val 
+        dummy.val = dummy1.val
+        dummy1.val = temp 
         return head
