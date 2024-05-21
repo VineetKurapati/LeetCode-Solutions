@@ -5,7 +5,7 @@ class Solution:
         if n < 0:
             x = 1/x
             n = abs(n)
-        if n%2 == 0:
+        if n % 2 == 0:
             return self.myPow(x*x, n//2)
         else:
             return x*self.myPow(x, n-1)
