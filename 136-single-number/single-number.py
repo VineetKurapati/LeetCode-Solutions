@@ -1,6 +1,10 @@
 class Solution:
     def singleNumber(self, nums: List[int]) -> int:
-        res = 0
+        d = {}
         for num in nums:
-            res ^= num
-        return res
+            if num not in d:
+                d[num] = 0
+            d[num] += 1
+        for num in d:
+            if d[num] == 1:
+                return num
