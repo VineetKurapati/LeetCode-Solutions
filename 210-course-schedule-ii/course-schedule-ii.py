@@ -1,15 +1,13 @@
 class Solution:
     def findOrder(self, n: int, prerequisites: List[List[int]]) -> List[int]:
-        adj = [[] for _ in range(n)]
-        indegree = [0] * n
-        res = []
-        for p in prerequisites:
-            course = p[0]
-            pre = p[1]
-            adj[pre].append(course)
-            indegree[course] += 1 
+        adj = defaultdict(list)
+        indegree = {i : 0 for i in range(n)}
+        print(indegree)
+        for u, v in prerequisites:
+            adj[v].append(u)
+            indegree[u] += 1
         queue = deque()
-        for i in range(len(indegree)):
+        for i in indegree:
             if indegree[i] == 0:
                 queue.append(i)
         res = []
@@ -24,7 +22,6 @@ class Solution:
             return res
         else:
             return []
-
-
-
         
+
+
