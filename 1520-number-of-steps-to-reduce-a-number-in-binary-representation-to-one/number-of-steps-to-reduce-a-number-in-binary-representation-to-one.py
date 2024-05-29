@@ -1,13 +1,10 @@
 class Solution:
     def numSteps(self, s: str) -> int:
-        # Convert Binary to Int 
-        integer = int(s, 2)
-        print(integer)
-        def backtrack(num, count):
-            if num == 1:
-                return count
-            if num % 2 != 0:
-                return backtrack(num + 1, count + 1)
-            return backtrack(num//2, count + 1)
-        res = backtrack(integer, 0)
-        return res
+        steps = 0
+        while len(s) > 1:
+            if s[-1] == '0':  # If the last character is '0', the number is even
+                s = s[:-1]  # Divide by 2 by removing the last character
+            else:  # If the last character is '1', the number is odd
+                s = bin(int(s, 2) + 1)[2:]  # Add 1 to the binary number and convert back to binary string
+            steps += 1
+        return steps
