@@ -1,13 +1,12 @@
 class Solution:
     def countTriplets(self, arr: List[int]) -> int:
-        count = 0 
-        for start in range(len(arr) - 1):
-            xor_A = 0
-            for mid in range(start + 1, len(arr)):
-                xor_A ^= arr[mid - 1]
-                xor_B = 0
-                for end in range(mid, len(arr)):
-                    xor_B ^= arr[end]
-                    if xor_A == xor_B:
-                        count +=1
+        prefix_xor = [0] + arr[:]
+        n = len(prefix_xor)
+        for i in range(1, n):
+            prefix_xor[i] ^= prefix_xor[i-1]
+        count = 0
+        for start in range(n):
+            for end in range(start + 1, n):
+                if prefix_xor[start] == prefix_xor[end]:
+                    count += end - start - 1
         return count
