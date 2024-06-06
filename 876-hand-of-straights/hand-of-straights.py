@@ -7,7 +7,6 @@ class Solution:
         hand = sorted(hand)
         print(hand)
         i = 0
-        res = []
         while i < n:
             curr = hand[i]
             temp_k = k-1
