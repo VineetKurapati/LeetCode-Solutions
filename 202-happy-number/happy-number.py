@@ -1,14 +1,18 @@
 class Solution:
     def isHappy(self, n: int) -> bool:
-        t = n
         s = set()
-        while n!=1 and n not in s:
-            sum_squares = 0
+        def happy(n):
+            if n in s:
+                return False
+            if n == 1:
+                return True
+            count = 0
             s.add(n)
-            while n>0:
-                x = n % 10
-                sum_squares += x*x
-                n //= 10
-            n = sum_squares
-        return n == 1
-        
+            while n > 0:
+                t = n % 10 
+                t = t ** 2
+                count += t
+                n = n // 10
+            print(count)
+            return happy(count)
+        return happy(n)
