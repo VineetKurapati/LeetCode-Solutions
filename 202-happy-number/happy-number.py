@@ -9,10 +9,8 @@ class Solution:
             count = 0
             s.add(n)
             while n > 0:
-                t = n % 10 
-                t = t ** 2
+                t = (n % 10) ** 2 
                 count += t
                 n = n // 10
-            print(count)
             return happy(count)
         return happy(n)
