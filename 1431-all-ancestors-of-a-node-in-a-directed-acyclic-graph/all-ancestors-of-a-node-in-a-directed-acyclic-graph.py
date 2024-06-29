@@ -7,7 +7,7 @@ class Solution:
         vis = set()
         temp = []
         while queue:
-            curr_node = queue.popleft()  # Use popleft for BFS
+            curr_node = queue.pop()  # Use popleft for BFS
             if curr_node in vis:
                 continue
             vis.add(curr_node)
