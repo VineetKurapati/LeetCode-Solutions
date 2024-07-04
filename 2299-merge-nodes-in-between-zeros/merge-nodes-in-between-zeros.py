@@ -13,14 +13,7 @@ class Solution:
                 count += head.val
                 head = head.next
             head = head.next
-            res.next = ListNode(count)
-            res = res.next
-        result = ListNode(0)
-        d = result 
-        while dummy:
-            if dummy.val != 0:
-                d.next = ListNode(dummy.val)
-                d = d.next
-            dummy = dummy.next
-            
-        return result.next
+            if count != 0:
+                res.next = ListNode(count)
+                res = res.next
+        return dummy.next
