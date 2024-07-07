@@ -1,27 +1,20 @@
-from collections import defaultdict
-
 class Solution:
     def findCircleNum(self, isConnected: List[List[int]]) -> int:
+        adj = defaultdict(set)
         n = len(isConnected)
-        parent = [i for i in range(n)]
-        res = n
-        
-        def find(x):
-            if parent[x] != x:
-                parent[x] = find(parent[x])
-            return parent[x]
-        
-        def union(x, y):
-            nonlocal res
-            root_x = find(x)
-            root_y = find(y)
-            if root_x != root_y:
-                parent[root_y] = root_x
-                res -= 1
-        
+        count = 0 
+        vis = set()
         for i in range(n):
-            for j in range(i+1, n):  # Optimization: Only iterate over the upper triangular part since the matrix is symmetric
+            for j in range(n):
                 if isConnected[i][j] == 1:
-                    union(i, j)
-        
-        return res
+                    adj[i].add(j)
+        def dfs(curr_node):
+            for neigh in adj[curr_node]:
+                if neigh not in vis:
+                    vis.add(neigh)
+                    dfs(neigh)
+        for curr_node in adj:
+            if curr_node not in vis:
+                dfs(curr_node)
+                count += 1
+        return count
