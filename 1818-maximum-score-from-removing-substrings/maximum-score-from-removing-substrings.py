@@ -1,21 +1,19 @@
 class Solution:
     def maximumGain(self, s: str, x: int, y: int) -> int:
-        def remove_pairs(s: str, pair: str, gain: int) -> (str, int):
+        def helper(s, pattern, score):
             stack = []
             count = 0
             for c in s:
-                if stack and stack[-1] == pair[0] and c == pair[1]:
+                if c == pattern[1] and len(stack) > 0 and stack[-1] == pattern[0]:
                     stack.pop()
-                    count += gain
+                    count += score
                 else:
                     stack.append(c)
-            return ''.join(stack), count
-
+            return "".join(stack) , count
         if x > y:
-            s, count_x = remove_pairs(s, "ab", x)
-            s, count_y = remove_pairs(s, "ba", y)
+            s, x_count = helper(s, "ab", x)
+            s, y_count = helper(s, "ba", y)
         else:
-            s, count_y = remove_pairs(s, "ba", y)
-            s, count_x = remove_pairs(s, "ab", x)
-
-        return count_x + count_y
+            s, y_count = helper(s, "ba", y)
+            s, x_count = helper(s, "ab", x)
+        return x_count + y_count
