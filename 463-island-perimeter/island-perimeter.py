@@ -1,16 +1,17 @@
 class Solution:
     def islandPerimeter(self, grid: List[List[int]]) -> int:
+        vis = set()
         n = len(grid)
         m = len(grid[0])
-        count = 0
+        def dfs(i, j):
+            if i >= n or j >=m or i < 0 or j < 0 or grid[i][j] == 0:
+                return 1
+            if (i, j) in vis:
+                return 0
+            vis.add((i, j))
+            ans = dfs(i+1, j) + dfs(i, j+1) + dfs(i-1, j) + dfs(i, j-1)
+            return ans
         for i in range(n):
             for j in range(m):
                 if grid[i][j] == 1:
-                    left = 1 if i >= 0 and j - 1 >= 0 and grid[i][j-1] >= 1 else 0
-                    right = 1 if i >= 0 and j + 1 < m and grid[i][j+1] >= 1 else 0
-                    top = 1 if i - 1 >= 0 and j >= 0 and grid[i-1][j] >= 1 else 0
-                    bottom = 1 if i + 1 < n and j >= 0 and grid[i+1][j] >= 1 else 0
-                    count += 4 - (left + right + top + bottom)  
-
-        print(grid)
-        return count
+                    return dfs(i, j)
