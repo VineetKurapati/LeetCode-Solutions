@@ -1,22 +1,16 @@
-from typing import List
-from collections import defaultdict
-
 class Solution:
     def findTargetSumWays(self, nums: List[int], target: int) -> int:
-        vis = defaultdict(int)
-        
-        def backtrack(index, current_sum):
-            if (index, current_sum) in vis:
-                return vis[(index, current_sum)]
-            if index == len(nums):
-                if current_sum == target:
-                    return 1
-                else:
-                    return 0
-            add_ways = backtrack(index + 1, current_sum + nums[index])
-            sub_ways = backtrack(index + 1, current_sum - nums[index])
-            vis[(index, current_sum)] = add_ways + sub_ways
+        dp = {}
+        def dfs(nums, i, n, curr, target):
+            nonlocal dp
+            if i == n and curr == target:
+                return 1
             
-            return vis[(index, current_sum)]
-        
-        return backtrack(0, 0)
+            if i >= n and curr != target:
+                return 0
+            
+            if (curr, i) in dp:
+                return dp[(curr, i)]
+            dp[(curr, i)] = dfs(nums, i+1, n, curr + nums[i], target) +dfs(nums, i+1, n, curr - nums[i], target)
+            return dp[(curr, i)]
+        return dfs(nums, 0, len(nums), 0, target)
