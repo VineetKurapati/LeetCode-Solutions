@@ -4,8 +4,7 @@ class Solution:
         heapq.heapify(heap)
         score = 0
         while heap and k:
-            curr = heapq.heappop(heap)
-            curr = curr * -1
+            curr = -1 * heapq.heappop(heap)
             score += curr 
             val = ceil(curr/3)
             heapq.heappush(heap, -1 * val)
