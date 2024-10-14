@@ -6,7 +6,6 @@ class Solution:
         while heap and k:
             curr = heapq.heappop(heap)
             curr = curr * -1
-            print(curr)
             score += curr 
             val = ceil(curr/3)
             heapq.heappush(heap, -1 * val)
