@@ -1,20 +1,24 @@
 class Solution:
-    def canFinish(self, n: int, prerequisites: List[List[int]]) -> bool:
-        adj = [[] for _ in range(n)]
-        indegree = [0] * n
-        for course, pre in prerequisites:
-            adj[pre].append(course)
-            indegree[course] += 1
-        queue = deque()
-        for i in range(len(indegree)):
-            if indegree[i] == 0:
-                queue.append(i)
-        res = []
-        while queue:
-            curr = queue.pop()
-            res.append(curr)
-            for neigh in adj[curr]:
-                indegree[neigh] -=1
-                if indegree[neigh] == 0:
-                    queue.append(neigh)
-        return len(res) == n
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        graph = [[] for _ in range(numCourses)]
+        for course, prereq in prerequisites:
+            graph[prereq].append(course)
+        visited = [0] * numCourses
+
+        def dfs(course):
+            if visited[course] == 1:  
+                return False
+            if visited[course] == 2:  
+                return True
+
+            visited[course] = 1
+            for neighbor in graph[course]:
+                if not dfs(neighbor): 
+                    return False
+            visited[course] = 2
+            return True
+        for i in range(numCourses):
+            if not dfs(i):
+                return False
+
+        return True
