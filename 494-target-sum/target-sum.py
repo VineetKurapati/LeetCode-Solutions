@@ -1,16 +1,14 @@
 class Solution:
     def findTargetSumWays(self, nums: List[int], target: int) -> int:
         dp = {}
-        def dfs(nums, i, n, curr, target):
+        def dfs(curr, i):
             nonlocal dp
-            if i == n and curr == target:
+            if i == len(nums) and curr == target:
                 return 1
-            
-            if i >= n and curr != target:
+            if i >=len(nums) and curr != target:
                 return 0
-            
             if (curr, i) in dp:
                 return dp[(curr, i)]
-            dp[(curr, i)] = dfs(nums, i+1, n, curr + nums[i], target) +dfs(nums, i+1, n, curr - nums[i], target)
+            dp[(curr, i)] = dfs(curr + nums[i], i + 1) + dfs(curr - nums[i], i + 1)
             return dp[(curr, i)]
-        return dfs(nums, 0, len(nums), 0, target)
+        return dfs(0, 0)
