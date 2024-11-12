@@ -2,7 +2,6 @@ class RandomizedSet:
 
     def __init__(self):
         self.s = set()
-        res = []
     def insert(self, val: int) -> bool:
         if val in self.s:
             return False
