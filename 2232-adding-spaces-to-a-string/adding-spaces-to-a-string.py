@@ -6,7 +6,6 @@ class Solution:
         res = ""
         for i in range(n):
             end = spaces[i]
-            print(end)
             while j < end:
                res += s[j]
                j+=1
