@@ -12,5 +12,4 @@ class Solution:
                 j +=1 
             else:
                 i += 1
-        print(count, m)
         return count == m
