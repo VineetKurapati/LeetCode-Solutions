@@ -10,10 +10,8 @@ class Solution:
                 temp = s[i]
             count = 0 
             for j in range(n - len(temp) +1 ):
-                print(s[j : j + len(temp)])
                 if s[j : j + len(temp)] == temp:
                     count += 1
-            print(f"for {temp} count is {count}")
             if count >= 3:
                 res = max(res, len(temp))
         if res == 0:
