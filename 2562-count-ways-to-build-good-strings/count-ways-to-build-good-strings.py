@@ -1,12 +1,15 @@
 class Solution:
     def countGoodStrings(self, low: int, high: int, zero: int, one: int) -> int:
         MOD = 10**9 + 7
-        dp = [0] * (high + 1)
-        dp[0] = 1
-        for i in range(high + 1):
-            if dp[i] > 0:
-                if i + zero <= high:
-                    dp[i + zero] = (dp[i+zero] + dp[i]) % MOD
-                if i + one <= high:
-                    dp[i+one] = (dp[i+one] + dp[i]) % MOD
-        return sum(dp[low : high + 1]) % MOD
+        dp = {}
+        def backtrack(temp):
+            if low <= temp and high == temp:
+                return 1
+            if temp in dp:
+                return dp[temp]
+            if high < temp:
+                return 0
+            dp[temp] = 1 if temp >= low else 0
+            dp[temp] += backtrack(temp + zero) + backtrack(temp + one)
+            return dp[temp] % MOD 
+        return backtrack(0)
