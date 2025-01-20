@@ -4,7 +4,5 @@ class Solution:
         for s in strs:
             t = "".join(sorted(s))
             m[t].append(s)
-        res = []
-        for i in m:
-            res.append(m[i])
-        return res
+        
+        return [m[i] for i in m]
