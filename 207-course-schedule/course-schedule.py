@@ -1,24 +1,26 @@
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        graph = [[] for _ in range(numCourses)]
-        for course, prereq in prerequisites:
-            graph[prereq].append(course)
-        visited = [0] * numCourses
-
-        def dfs(course):
-            if visited[course] == 1:  
-                return False
-            if visited[course] == 2:  
+        graph = defaultdict(list)
+        for u, v in prerequisites:
+            graph[u].append(v)
+        vis = set()
+        processed = set()
+        def search(curr_course):
+            nonlocal vis
+            nonlocal graph
+            nonlocal processed
+            if curr_course in vis:
+                return False 
+            if curr_course in processed:
                 return True
-
-            visited[course] = 1
-            for neighbor in graph[course]:
-                if not dfs(neighbor): 
-                    return False
-            visited[course] = 2
+            vis.add(curr_course)
+            for neigh in graph[curr_course]:
+                if not search(neigh):
+                    return False 
+            vis.remove(curr_course)
+            processed.add(curr_course)
             return True
         for i in range(numCourses):
-            if not dfs(i):
-                return False
-
+            if not search(i):
+                return False 
         return True
