@@ -3,13 +3,12 @@ class Solution:
         left_prod = []
         right_prod = []
         left = 1
+        right = 1 
         for i in range(len(nums)):
             left_prod.append(left)
-            left *= nums[i]
-        right = 1   
-        for i in range(len(nums) - 1, -1, -1):
             right_prod.append(right)
-            right*= nums[i]
+            left *= nums[i]
+            right *= nums[(len(nums) -1 - i)]
         res = []
         for i in range(len(nums)):
             res.append(left_prod[i] * right_prod[(len(nums) - i - 1)])
