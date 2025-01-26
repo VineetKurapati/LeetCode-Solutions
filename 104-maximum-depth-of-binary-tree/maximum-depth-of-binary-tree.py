@@ -11,6 +11,5 @@ class Solution:
                 return 0 
             l = 1 + dfs(root.left)
             r = 1 + dfs(root.right)
-
             return max(l, r)
         return dfs(root)
