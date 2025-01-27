@@ -6,20 +6,17 @@ class Solution:
         vis = set()
         processed = set()
         def search(curr_course):
-            nonlocal vis
-            nonlocal graph
-            nonlocal processed
             if curr_course in vis:
                 return False 
             if curr_course in processed:
-                return True
+                return True 
             vis.add(curr_course)
             for neigh in graph[curr_course]:
                 if not search(neigh):
                     return False 
             vis.remove(curr_course)
             processed.add(curr_course)
-            return True
+            return True 
         for i in range(numCourses):
             if not search(i):
                 return False 
