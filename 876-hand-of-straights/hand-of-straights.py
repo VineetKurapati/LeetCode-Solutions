@@ -1,22 +1,13 @@
 class Solution:
-    def isNStraightHand(self, hand: List[int], k: int) -> bool:
-        n = len(hand)
-        if n % k != 0:
-            return False
-        d = collections.Counter(hand)
-        hand = sorted(hand)
-        print(hand)
-        i = 0
-        while i < n:
-            curr = hand[i]
-            temp_k = k-1
-            temp = []
-            while d[curr] > 0 and temp_k >= 0:
-                d[curr] -= 1
-                temp_k -= 1
-                temp.append(curr)
-                curr += 1
-            if len(temp) != k and len(temp) != 0:
-                return False
-            i += 1
+    def isNStraightHand(self, hand: List[int], groupSize: int) -> bool:
+        hand.sort()
+        count = Counter(hand)
+        for n in hand:
+            if count[n] == 0:
+                continue 
+            for i in range(groupSize):
+                if count[n + i] == 0:
+                    return False 
+                else:
+                    count[n + i] -= 1
         return True
