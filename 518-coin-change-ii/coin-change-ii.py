@@ -1,19 +1,17 @@
-from typing import List
-
 class Solution:
     def change(self, amount: int, coins: List[int]) -> int:
         dp = {}
-        
-        def dfs(amount, index):
-            if amount == 0:
-                return 1
-            if amount < 0 or index >= len(coins):
+        def dfs(i, curr):
+            if curr > amount:
                 return 0
-            if (amount, index) in dp:
-                return dp[(amount, index)]
-            include = dfs(amount - coins[index], index)
-            exclude = dfs(amount, index + 1)
-            dp[(amount, index)] = include + exclude
-            return dp[(amount, index)]
-
-        return dfs(amount, 0)
+            if curr == amount:
+                return 1
+            if i >= len(coins):
+                return 0
+            if (i, curr) in dp:
+                return dp[(i, curr)]
+            use_coin_and_stay = dfs(i, curr + coins[i])
+            dont_use_coin = dfs(i + 1, curr)
+            dp[(i, curr)] = use_coin_and_stay + dont_use_coin
+            return dp[(i, curr)]
+        return dfs(0, 0)
