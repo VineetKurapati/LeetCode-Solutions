@@ -8,7 +8,7 @@ class NumberContainers:
         self.s[index] = number
         self.num[number].add(index)
     def find(self, number: int) -> int:
-        if number not in self.num or len(self.num[number]) == 0:
+        if number not in self.num or not self.num[number]:
             return -1 
         return self.num[number][0]
 
