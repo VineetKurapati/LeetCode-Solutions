@@ -5,6 +5,6 @@ class Solution:
             if c.isalpha():
                 stack.append(c)
             else:
-                if len(stack) > 0:
+                if stack:
                     stack.pop()
         return "".join(stack)
