@@ -16,4 +16,7 @@ class Solution:
                 stack.pop()
             else:
                 stack.append(int(o))
-        return sum(stack)
+        res = 0
+        for i in stack:
+            res += i
+        return res
