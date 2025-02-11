@@ -16,5 +16,4 @@ class Solution:
                 stack.pop()
             else:
                 stack.append(int(o))
-            print(f"for operation {o} now the stack is {stack}")
         return sum(stack)
