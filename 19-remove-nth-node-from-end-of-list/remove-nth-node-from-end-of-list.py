@@ -4,21 +4,21 @@
 #         self.val = val
 #         self.next = next
 class Solution:
-    def countlen(self, head):
+    def getLength(self, head):
         count = 0 
         while head:
-            head = head.next 
             count +=1 
-        return count
+            head = head.next 
+        return count 
     def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
-        k = self.countlen(head)
-        if n == k:
-            return head.next
-        k-=n
-        dummy = ListNode(0)
-        dummy.next = head
-        while k and dummy:
-            dummy = dummy.next 
-            k-=1 
-        dummy.next = dummy.next.next
+        c = self.getLength(head)
+        if n == c:
+            return head.next 
+        k = c - n - 1
+        curr = head
+        while k >  0:
+            curr = curr.next 
+            k-= 1
+        if curr.next:
+            curr.next = curr.next.next 
         return head
