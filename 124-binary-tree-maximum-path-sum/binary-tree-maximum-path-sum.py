@@ -7,14 +7,13 @@
 class Solution:
     def maxPathSum(self, root: Optional[TreeNode]) -> int:
         self.max_sum = float("-inf")
-        def max_gain(node):
-            if not node:
+        def helper(root):
+            if not root:
                 return 0 
-            
-            left_gain = max(max_gain(node.left), 0)
-            right_gain = max(max_gain(node.right), 0)
-            can_max_sum = node.val + left_gain + right_gain
-            self.max_sum = max(can_max_sum, self.max_sum)
-            return node.val + max(left_gain, right_gain)
-        max_gain(root)
+            left = max(0, helper(root.left))
+            right = max(0, helper(root.right))
+            curr_sum = root.val + left + right
+            self.max_sum = max(self.max_sum, curr_sum)
+            return root.val + max(left, right)
+        helper(root)
         return self.max_sum
