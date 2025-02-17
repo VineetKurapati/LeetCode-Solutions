@@ -1,15 +1,16 @@
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
-        def backtrack(temp):
-            nonlocal res 
-            if len(temp) == len(nums):
+        n = len(nums)
+        res = []
+        def dfs(temp):
+            if len(temp) == n:
                 res.append(temp.copy())
-                return
+                return 
             for num in nums:
                 if num not in temp:
                     temp.append(num)
-                    backtrack(temp)
+                    dfs(temp)
                     temp.pop()
-        res = []
-        backtrack([])
+        dfs([])
         return res
+            
