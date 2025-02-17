@@ -1,18 +1,14 @@
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
-        res = []
-        stack = []
-        def backtrack(openp, closep):
-            if openp == closep == n:
-                res.append("".join(stack))
+        res = set()
+        def helper(open_count, close_count, current):
+            if open_count == n and close_count == n:
+                res.add(current)
                 return 
-            if openp < n:
-                stack.append("(")
-                backtrack(openp + 1, closep)
-                stack.pop()
-            if openp > closep:
-                stack.append(")")
-                backtrack(openp, closep + 1)
-                stack.pop()
-        backtrack(0, 0)
-        return res
+            if open_count < n:
+                helper(open_count + 1, close_count, current + '(')
+            if open_count > close_count:
+                helper(open_count, close_count + 1, current + ')')
+        
+        helper(0, 0, "")
+        return list(res)
