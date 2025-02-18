@@ -1,10 +1,10 @@
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
         n = len(nums)
-        res = []
+        res = set()
         def dfs(temp):
             if len(temp) == n:
-                res.append(temp.copy())
+                res.add(tuple(temp))
                 return 
             for num in nums:
                 if num not in temp:
@@ -12,5 +12,4 @@ class Solution:
                     dfs(temp)
                     temp.pop()
         dfs([])
-        return res
-            
+        return [i for i in res]
