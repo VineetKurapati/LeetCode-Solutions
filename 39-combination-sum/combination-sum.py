@@ -7,11 +7,9 @@ class Solution:
                 return 
             if count == target:
                 res.add(tuple(temp.copy()))
-            count += candidates[i]
             temp.append(candidates[i])
-            backtrack(i, count, temp)
-            backtrack(i + 1, count, temp)
-            count -= candidates[i]
+            backtrack(i, count + candidates[i], temp)
+            backtrack(i + 1, count + candidates[i], temp)
             temp.pop()
             backtrack(i + 1, count, temp)
         backtrack(0, 0, [])
