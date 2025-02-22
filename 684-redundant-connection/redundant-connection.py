@@ -5,11 +5,11 @@ class Solution:
         rank = [1 for _ in range(n + 1)]
         def find(x):
             if parent[x] != x:
-                parent[x] = find(parent[x])  
+                parent[x] = find(parent[x])
             return parent[x]
-        for x, y in edges:
+        def union(x, y):
             X = find(x)
-            Y = find(y) 
+            Y = find(y)
             if X == Y:
                 return [x, y]
             if rank[X] > rank[Y]:
@@ -18,3 +18,6 @@ class Solution:
             else:
                 parent[X] = Y
                 rank[Y] +=1
+        for x, y in edges:
+            if union(x, y):
+                return union(x, y)
