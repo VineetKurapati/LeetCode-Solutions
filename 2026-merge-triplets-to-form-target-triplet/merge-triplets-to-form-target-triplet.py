@@ -11,7 +11,6 @@ class Solution:
                 required_triplets.append(i)
         if not required_triplets:
             return False
-        print(required_triplets)
         t = required_triplets[0]
         if t == target:
             return True 
@@ -20,7 +19,6 @@ class Solution:
             two = max(t[1], i[1])
             three = max(t[2], i[2])
             res = [one, two, three]
-            print(res)
             if res == target:
                 return True 
             t = res
