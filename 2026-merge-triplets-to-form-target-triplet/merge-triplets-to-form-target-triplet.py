@@ -11,7 +11,6 @@ class Solution:
                 required_triplets.append(i)
         if not required_triplets:
             return False
-        required_triplets.sort()
         print(required_triplets)
         t = required_triplets[0]
         if t == target:
