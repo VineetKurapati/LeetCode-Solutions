@@ -1,18 +1,17 @@
 class Solution:
     def longestPalindrome(self, s: str) -> str:
-        res = ""
         n = len(s)
+        def expandaroundcenter(i, j):
+            while i >= 0 and j < n and s[i] == s[j]:
+                i -=1 
+                j+=1 
+            return s[i + 1:j]
+        res = ""
         for i in range(n):
-            l, r = i, i
-            while l >=0 and r < n and s[l] == s[r]:
-                l -= 1 
-                r +=1 
-            if len(res) <= len(s[l + 1: r]):
-                res = s[l + 1: r]
-            l, r = i, i+1
-            while l >=0 and r < n and s[l] == s[r]:
-                l -= 1
-                r += 1
-            if len(res) <= len(s[l + 1: r]):
-                res = s[l + 1: r]
+            first = expandaroundcenter(i, i)
+            second = expandaroundcenter(i, i + 1)
+            if len(first) >= len(res):
+                res = first
+            if len(second) >= len(res):
+                res = second 
         return res
