@@ -25,8 +25,7 @@ class Solution:
             res.append(c)
             i += 1
             j += 1
-
-        # Append any remaining characters in str1 and str2.
+        print(res)
         res.append(str1[i:])
         res.append(str2[j:])
         return "".join(res)
