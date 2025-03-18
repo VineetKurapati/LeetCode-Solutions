@@ -1,12 +1,14 @@
 class Solution:
     def jump(self, nums: List[int]) -> int:
-        res = 0
-        l, r = 0, 0
-        while r < len(nums) - 1:
-            furthest = 0 
-            for i in range(l, r + 1):
-                furthest = max(furthest, i + nums[i])
-            l = r + 1
-            r = furthest 
-            res += 1
-        return res
+        n = len(nums)
+        if n < 2:
+            return 0
+        jumps = 0
+        current_end = 0
+        farthest = 0
+        for i in range(n - 1):
+            farthest = max(farthest, i + nums[i])
+            if i == current_end:
+                jumps += 1
+                current_end = farthest
+        return jumps
